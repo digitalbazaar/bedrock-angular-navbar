@@ -1,0 +1,11 @@
+{
+  "name": "bedrock-angular-navbar",
+  "version": "1.0.0",
+  "main": ["./navbar.js"],
+  "moduleType": ["amd"],
+  "ignore": [],
+  "dependencies": {
+    "bedrock-angular": "^1.4.0",
+    "bedrock-angular-alert": "^1.0.0"
+  }
+}

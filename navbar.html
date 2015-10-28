@@ -1,0 +1,49 @@
+<div>
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <div name="br-navbar-header">
+          <div name="br-navbar-header-inner"></div>
+          <a class="navbar-brand" href="/">
+            <img ng-if="model.style.brand.src"
+              ng-src="{{model.style.brand.src}}"
+              width="{{model.style.brand.width}}"
+              height="{{model.style.brand.height}}"
+              alt="{{model.style.brand.alt}}" />
+            <span ng-if="!model.style.brand.src">{{model.siteTitle}}</span>
+          </a>
+        </div>
+        <div name="br-navbar-body">
+          <div name="br-navbar-menu">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+              <!-- nav menu -->
+              <ul class="nav navbar-nav">
+                <li ng-repeat="item in model.service.menus"
+                  ng-class="{active: route.vars.title == menu.pageTitle, dropdown: menu.items}">
+                  <a ng-if="!menu.items" href="{{menu.url}}"><i class="{{menu.icon}}"></i> {{menu.label}}</a>
+                  <a ng-if="menu.items" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="{{menu.icon}}"></i> {{menu.label}}
+                    <b class="caret"></b>
+                  </a>
+                  <ul ng-if="menu.items" class="dropdown-menu">
+                    <li ng-repeat="item in menu.items"
+                      ng-class="{active: route.vars.title == item.pageTitle, divider: item.divider}">
+                      <a ng-if="!item.divider" href="{{item.url}}"><i class="{{item.icon}}"></i> {{item.label}}</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul><!-- /nav menu -->
+            </div>
+          </div>
+          <div name="br-navbar-toolbar">
+            <div class="navbar-right">
+              <div name="br-navbar-tool"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div br-alerts br-fixed="true"></div>
+</div>
