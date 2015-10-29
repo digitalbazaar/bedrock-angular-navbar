@@ -14,7 +14,7 @@ define([
 
 'use strict';
 
-var module = angular.module('bedrock.navbar', ['bedrock.alert']);
+var module = angular.module('bedrock-navbar', ['bedrock.alert']);
 
 module.directive(navbarDirective);
 module.directive(navbarPluginDirective);
