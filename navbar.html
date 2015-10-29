@@ -13,36 +13,36 @@
             <span ng-if="!model.brand.src">{{model.siteTitle}}</span>
           </a>
         </div>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="navbar-collapse">
         <div br-slot="br-navbar-body">
           <div br-slot="br-navbar-menu">
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="navbar-collapse">
-              <!-- nav menu -->
-              <ul class="nav navbar-nav">
-                <li ng-repeat="item in model.service.menus"
-                  ng-class="{active: route.vars.title == menu.pageTitle, dropdown: menu.items}">
-                  <a ng-if="!menu.items" href="{{menu.url}}"><i class="{{menu.icon}}"></i> {{menu.label}}</a>
-                  <a ng-if="menu.items" href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="{{menu.icon}}"></i> {{menu.label}}
-                    <b class="caret"></b>
-                  </a>
-                  <ul ng-if="menu.items" class="dropdown-menu">
-                    <li ng-repeat="item in menu.items"
-                      ng-class="{active: route.vars.title == item.pageTitle, divider: item.divider}">
-                      <a ng-if="!item.divider" href="{{item.url}}"><i class="{{item.icon}}"></i> {{item.label}}</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul><!-- /nav menu -->
-            </div>
+            <!-- nav menu -->
+            <ul class="nav navbar-nav">
+              <li ng-repeat="item in model.service.menus"
+                ng-class="{active: route.vars.title == menu.pageTitle, dropdown: menu.items}">
+                <a ng-if="!menu.items" href="{{menu.url}}"><i class="{{menu.icon}}"></i> {{menu.label}}</a>
+                <a ng-if="menu.items" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="{{menu.icon}}"></i> {{menu.label}}
+                  <b class="caret"></b>
+                </a>
+                <ul ng-if="menu.items" class="dropdown-menu">
+                  <li ng-repeat="item in menu.items"
+                    ng-class="{active: route.vars.title == item.pageTitle, divider: item.divider}">
+                    <a ng-if="!item.divider" href="{{item.url}}"><i class="{{item.icon}}"></i> {{item.label}}</a>
+                  </li>
+                </ul>
+              </li>
+            </ul><!-- /nav menu -->
           </div>
-          <div ng-repeat="template in model.templates">
-            <ng-include src="template"></ng-include>
-          </div>
-          <div br-slot="br-navbar-toolbar">
-            <div class="navbar-right">
-              <div br-slot="br-navbar-tool"></div>
-            </div>
+        </div>
+        <div ng-repeat="template in model.templates">
+          <ng-include src="template"></ng-include>
+        </div>
+        <div br-slot="br-navbar-toolbar">
+          <div class="navbar-right">
+            <div br-slot="br-navbar-tool"></div>
           </div>
         </div>
       </div>
