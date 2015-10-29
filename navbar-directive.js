@@ -65,7 +65,6 @@ function factory(brNavbarService, config) {
   return {
     restrict: 'E',
     scope: {},
-    transclude: true,
     templateUrl: requirejs.toUrl('bedrock-angular-navbar/navbar.html'),
     controller: Controller,
     controllerAs: 'model',
