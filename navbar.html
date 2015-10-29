@@ -2,8 +2,8 @@
   <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
-        <div name="br-navbar-header">
-          <div name="br-navbar-header-inner"></div>
+        <div br-slot="br-navbar-header">
+          <div br-slot="br-navbar-header-inner"></div>
           <a class="navbar-brand" href="/">
             <img ng-if="model.brand.src"
               ng-src="{{model.brand.src}}"
@@ -13,8 +13,8 @@
             <span ng-if="!model.brand.src">{{model.siteTitle}}</span>
           </a>
         </div>
-        <div name="br-navbar-body">
-          <div name="br-navbar-menu">
+        <div br-slot="br-navbar-body">
+          <div br-slot="br-navbar-menu">
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-collapse">
               <!-- nav menu -->
@@ -36,9 +36,9 @@
               </ul><!-- /nav menu -->
             </div>
           </div>
-          <div name="br-navbar-toolbar">
+          <div br-slot="br-navbar-toolbar">
             <div class="navbar-right">
-              <div name="br-navbar-tool"></div>
+              <div br-slot="br-navbar-tool"></div>
             </div>
           </div>
         </div>

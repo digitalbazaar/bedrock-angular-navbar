@@ -17,47 +17,68 @@ function factory(brNavbarService, config) {
     self.brand = config.data.style.brand;
     self.siteTitle = config.data.siteTitle;
     self.service = brNavbarService;
-    brNavbarService.register(self, $scope);
 
     // a stack for previously transcluded content
     var _stack = {};
 
     self.transclude = function(options) {
-      // TODO: implement a more robust mechanism for identifying slots
+      angular.forEach(options.element, function(element) {
+        element = angular.element(element);
 
-      // find where to transclude the element
-      var name = options.element.attr('name');
-      var target = $element.find(['name="' + name + '"']);
-      if(target.length === 0) {
-        throw new Error('"' + name + '" is not a valid slot in the navbar.');
-      }
-      target = angular.element(target[0]);
+        // find where to transclude the element
+        var slot = element.attr('br-slot');
+        if(!angular.isDefined(slot)) {
+          // nothing to transclude, continue
+          return;
+        }
 
-      // clean up element when its scope is destroyed
-      options.element.scope().$on('$destroy', function() {
+        var target = $element.find('[br-slot="' + slot + '"]');
+        if(target.length === 0) {
+          throw new Error('"' + slot + '" is not a valid slot in the navbar.');
+        }
+        var stack = _stack[slot] = _stack[slot] || [];
+        target = angular.element(target[0]);
+
+        // clean up element when its scope is destroyed
+        options.scope.$on(
+          '$destroy', _destroy(element, options.operation, target, stack));
+
+        element.removeAttr('br-slot');
+
         if(options.operation === 'append') {
-          options.element.remove();
+          target.append(element);
         }
         if(options.operation === 'replace') {
-          var prev;
-          while(true) {
-            prev = _stack[name].pop();
-            if(!prev.scope().$$destroyed) {
-              break;
-            }
-          }
-          options.element.replaceWith(prev);
+          stack.push(target.children());
+          target.empty();
+          target.append(element);
         }
-        options = null;
       });
+    };
 
-      if(options.operation === 'append') {
-        target.append(options.element);
+    brNavbarService.register(self, $scope);
+  }
+
+  function _destroy(element, operation, target, stack) {
+    return function() {
+      // if element is in stack, just remove it from the stack
+      for(var i = 0; i < stack.length; ++i) {
+        var idx = stack[i].index(element);
+        if(idx !== -1) {
+          if(stack[i].length === 1) {
+            stack.splice(i, 1);
+          }
+          element.remove();
+          return;
+        }
       }
-      if(options.operation === 'replace') {
-        _stack[name] = _stack[name] || [];
-        _stack[name].push(target[0]);
-        target.replaceWith(options.element);
+
+      // remove element from target
+      element.remove();
+      if(operation === 'replace') {
+        if(target.is(':empty') && stack.length > 0) {
+          target.append(stack.pop());
+        }
       }
     };
   }

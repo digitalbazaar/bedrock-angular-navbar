@@ -51,6 +51,7 @@ function factory() {
    *
    * @param options the options to use:
    *          element the element to transclude.
+   *          scope the scope for the element.
    *          operation `append` or `replace`.
    */
   service.transclude = function(options) {
@@ -67,7 +68,7 @@ function factory() {
       // store transcluded content for later, but if it gets destroyed before
       // use, remove it from the list
       _pending.push(options);
-      var destroyed = options.element.scope().$on('$destroy', function() {
+      var destroyed = options.scope.$on('$destroy', function() {
         var idx = _pending.indexOf(options);
         if(idx !== -1) {
           _pending.splice(idx, 1);

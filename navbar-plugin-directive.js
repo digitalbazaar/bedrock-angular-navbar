@@ -13,12 +13,13 @@ define([], function() {
 function factory(brNavbarService) {
   return {
     restrict: 'E',
-    scope: {operation: '@br-operation'},
+    scope: {operation: '@brOperation'},
     transclude: true,
     link: function(scope, element, attrs, ctrls, transcludeFn) {
-      transcludeFn(function(clone) {
+      transcludeFn(function(clone, childScope) {
         brNavbarService.transclude({
           element: clone,
+          scope: childScope,
           operation: scope.operation
         });
       });
