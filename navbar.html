@@ -36,6 +36,9 @@
               </ul><!-- /nav menu -->
             </div>
           </div>
+          <div ng-repeat="template in model.templates">
+            <ng-include src="template"></ng-include>
+          </div>
           <div br-slot="br-navbar-toolbar">
             <div class="navbar-right">
               <div br-slot="br-navbar-tool"></div>

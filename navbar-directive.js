@@ -17,6 +17,7 @@ function factory(brNavbarService, config) {
     self.brand = config.data.style.brand;
     self.siteTitle = config.data.siteTitle;
     self.service = brNavbarService;
+    self.templates = [];
 
     // a stack for previously transcluded content
     var _stack = {};
@@ -54,6 +55,10 @@ function factory(brNavbarService, config) {
           target.append(element);
         }
       });
+    };
+
+    self.include = function(templateUrl) {
+      self.templates.push(templateUrl);
     };
 
     brNavbarService.register(self, $scope);

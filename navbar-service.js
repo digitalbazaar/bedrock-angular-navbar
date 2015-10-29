@@ -10,7 +10,7 @@ define(['angular'], function(angular) {
 'use strict';
 
 /* @ngInject */
-function factory() {
+function factory(config) {
   var service = {};
 
   // reference to the registered navbar element
@@ -36,13 +36,28 @@ function factory() {
       throw new Error('Navbar already registered.');
     }
     _navbar = navbar;
+
+    // unregister navbar once destroyed
     scope.$on('$destroy', function() {
       _navbar = null;
     });
+
+    // handle pending transclusions/inclusions
     while(_pending.length > 0) {
-      // TODO: optimize
-      navbar.transclude(_pending.shift());
+      var pending = _pending.shift();
+      if(pending.type === 'transclude') {
+        navbar.transclude(pending.options);
+      } else if(pending.type === 'include') {
+        navbar.include(pending.templateUrl);
+      }
     }
+
+    // include templates from config
+    config.site = config.site || {};
+    var templates = (config.site.navbar || {}).templates || [];
+    angular.forEach(templates, function(templateUrl) {
+      service.include(templateUrl);
+    });
   };
 
   /**
@@ -67,7 +82,10 @@ function factory() {
     if(!_navbar) {
       // store transcluded content for later, but if it gets destroyed before
       // use, remove it from the list
-      _pending.push(options);
+      _pending.push({
+        type: 'transclude',
+        options: options
+      });
       var destroyed = options.scope.$on('$destroy', function() {
         var idx = _pending.indexOf(options);
         if(idx !== -1) {
@@ -79,6 +97,27 @@ function factory() {
     }
 
     _navbar.transclude(options);
+  };
+
+  /**
+   * Includes the given template in the registered navbar.
+   *
+   * @param templateUrl the URL for the template.
+   */
+  service.include = function(templateUrl) {
+    if(typeof templateUrl !== 'string') {
+      throw new Error('templateUrl must be a string.');
+    }
+
+    if(!_navbar) {
+      _pending.push({
+        type: 'include',
+        templateUrl: templateUrl
+      });
+      return;
+    }
+
+    _navbar.include(templateUrl);
   };
 
   return service;
