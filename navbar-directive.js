@@ -22,6 +22,16 @@ function factory(brNavbarService, config) {
     // a stack for previously transcluded content
     var _stack = {};
 
+    // initialize menu items
+    angular.forEach(self.service.menus, function(menu) {
+      if(menu.init && typeof menu.init === 'function') {
+        menu.init($scope, menu);
+      }
+      if(menu.visible === 'undefined') {
+        menu.visible = true;
+      }
+    });
+
     self.transclude = function(options) {
       angular.forEach(options.element, function(element) {
         element = angular.element(element);

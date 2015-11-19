@@ -20,7 +20,7 @@
           <div br-slot="br-navbar-menu">
             <!-- nav menu -->
             <ul class="nav navbar-nav">
-              <li ng-repeat="menu in model.service.menus"
+              <li ng-repeat="menu in model.service.menus | filter: {visible: true} | orderBy: 'weight'"
                 ng-class="{active: route.vars.title == menu.pageTitle, dropdown: menu.items}">
                 <a ng-if="!menu.items" href="{{menu.url}}"><i class="{{menu.icon}}"></i> {{menu.label}}</a>
                 <a ng-if="menu.items" href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -40,10 +40,11 @@
         <div ng-repeat="template in model.templates">
           <ng-include src="template"></ng-include>
         </div>
-        <div br-slot="br-navbar-toolbar">
-          <div class="navbar-right">
-            <div br-slot="br-navbar-tool"></div>
-          </div>
+        <div class="navbar-right" br-slot="br-navbar-tool">
+        </div>
+        <div class="navbar-right btn-toolbar btn-group">
+          <div br-slot="br-navbar-toolbar-button"></div>
+        </div>
         </div>
       </div>
     </div>
