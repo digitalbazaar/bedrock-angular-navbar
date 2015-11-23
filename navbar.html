@@ -40,7 +40,10 @@
         <div ng-repeat="template in model.templates">
           <ng-include src="template"></ng-include>
         </div>
-        <div class="navbar-right" br-slot="br-navbar-tool">
+        <div br-slot="br-navbar-toolbar">
+          <div class="navbar-right">
+            <div br-slot="br-navbar-tool"></div>
+          </div>
         </div>
         <div class="navbar-right btn-toolbar btn-group">
           <div br-slot="br-navbar-toolbar-button"></div>
