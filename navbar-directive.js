@@ -24,7 +24,7 @@ function factory(brNavbarService, config) {
 
     // initialize menu items
     angular.forEach(self.service.menus, function(menu) {
-      if(menu.init && typeof menu.init === 'function') {
+      if(typeof menu.init === 'function') {
         menu.init($scope, menu);
       }
       if(menu.visible === 'undefined') {
