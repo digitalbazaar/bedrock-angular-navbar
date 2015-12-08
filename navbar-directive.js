@@ -27,7 +27,7 @@ function factory(brNavbarService, config) {
       if(typeof menu.init === 'function') {
         menu.init.call(menu, $scope, menu);
       }
-      if(menu.visible === 'undefined') {
+      if(menu.visible === undefined) {
         menu.visible = true;
       }
     });
