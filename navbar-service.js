@@ -1,7 +1,7 @@
 /*!
  * Navbar Service.
  *
- * Copyright (c) 2015 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2015-2016 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  */
@@ -9,9 +9,14 @@ define(['angular'], function(angular) {
 
 'use strict';
 
+function register(module) {
+  module.service('brNavbarService', factory);
+}
+
 /* @ngInject */
 function factory(config) {
   var service = {};
+  var _displayOrder = service.displayOrder = [];
 
   // reference to the registered navbar element
   var _navbar = null;
@@ -21,7 +26,7 @@ function factory(config) {
   var _pending = [];
 
   // exposes menus for configuration
-  service.menus = [];
+  service.menus = {};
 
   /**
    * Registers the app's navbar. Only one navbar can be registered at a time,
@@ -57,6 +62,27 @@ function factory(config) {
     var templates = (config.site.navbar || {}).templates || [];
     angular.forEach(templates, function(templateUrl) {
       service.include(templateUrl);
+    });
+  };
+
+  service.registerMenu = function(menu, options) {
+    if(!('label' in options)) {
+      throw new Error('Menu definition must include a "label" property.');
+    }
+    if(menu in service.menus) {
+      throw new Error('Menu "' + menu + '" is already registered.');
+    }
+
+    service.menus[menu] = options;
+
+    // display order explicitly set, return early
+    if(service.displayOrder !== _displayOrder) {
+      return;
+    }
+
+    service.displayOrder.push(menu);
+    service.displayOrder.sort(function(a, b) {
+      return service.menus[a].label.localeCompare(service.menus[b].label);
     });
   };
 
@@ -123,6 +149,6 @@ function factory(config) {
   return service;
 }
 
-return {brNavbarService: factory};
+return register;
 
 });

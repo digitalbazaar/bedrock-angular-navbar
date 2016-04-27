@@ -1,24 +1,24 @@
 /*!
  * Navbar module.
  *
- * Copyright (c) 2015 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2015-2016 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  */
 define([
   'angular',
-  './navbar-directive',
+  './navbar-component',
   './navbar-plugin-directive',
   './navbar-service'
-], function(angular, navbarDirective, navbarPluginDirective, navbarService) {
+], function(angular) {
 
 'use strict';
 
 var module = angular.module('bedrock-navbar', ['bedrock.alert']);
 
-module.directive(navbarDirective);
-module.directive(navbarPluginDirective);
-module.service(navbarService);
+Array.prototype.slice.call(arguments, 1).forEach(function(register) {
+  register(module);
+});
 
 return module.name;
 
