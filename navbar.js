@@ -8,7 +8,7 @@
 define([
   'angular',
   './navbar-component',
-  './navbar-plugin-directive',
+  './navbar-plugin-component',
   './navbar-service'
 ], function(angular) {
 
