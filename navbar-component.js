@@ -12,8 +12,8 @@ define(['angular'], function(angular) {
 function register(module) {
   module.component('brNavbar', {
     controller: Ctrl,
-    templateUrl:
-      requirejs.toUrl('bedrock-angular-navbar/navbar-component.html')
+    templateUrl: requirejs.toUrl(
+      'bedrock-angular-navbar/navbar-component.html')
   });
 }
 
@@ -75,6 +75,15 @@ function Ctrl($element, $scope, brNavbarService, config) {
 
   self.include = function(templateUrl) {
     self.templates.push(templateUrl);
+  };
+
+  self.getDisplayedMenus = function() {
+    var menus = [];
+    for(var i = 0; i < self.service.displayOrder.length; ++i) {
+      var name = self.service.displayOrder[i];
+      menus.push(self.service.menus[name]);
+    }
+    return menus;
   };
 
   brNavbarService.register(self, $scope);

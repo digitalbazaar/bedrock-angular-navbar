@@ -27,19 +27,19 @@
           <div br-slot="br-navbar-menu">
             <!-- nav menu -->
             <ul class="nav navbar-nav">
-              <li ng-repeat="menu in $ctrl.service.displayOrder"
-                ng-class="{active: route.vars.title == $ctrl.service.menus[menu].pageTitle, dropdown: $ctrl.service.menus[menu].items}">
-                <a ng-if="$ctrl.service.menus[menu].visible && !$ctrl.service.menus[menu].items"
-                  href="{{$ctrl.service.menus[menu].url}}">
-                  <i class="{{$ctrl.service.menus[menu].icon}}"></i> {{$ctrl.service.menus[menu].label}}</a>
-                <a ng-if="$ctrl.service.menus[menu].visible && $ctrl.service.menus[menu].items"
+              <li ng-repeat="menu in $ctrl.getDisplayedMenus()"
+                ng-class="{active: $root.route.vars.title == menu.pageTitle, dropdown: menu.items}">
+                <a ng-if="menu.visible && !menu.items"
+                  href="{{menu.url}}">
+                  <i class="{{menu.icon}}"></i> {{menu.label}}</a>
+                <a ng-if="menu.visible && menu.items"
                   href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="{{$ctrl.service.menus[menu].icon}}"></i> {{$ctrl.service.menus[menu].label}}
+                  <i class="{{menu.icon}}"></i> {{menu.label}}
                   <b class="caret"></b>
                 </a>
-                <ul ng-if="$ctrl.service.menus[menu].visible && $ctrl.service.menus[menu].items" class="dropdown-menu">
-                  <li ng-repeat="item in $ctrl.service.menus[menu].items"
-                    ng-class="{active: route.vars.title == item.pageTitle, divider: item.divider}">
+                <ul ng-if="menu.visible && menu.items" class="dropdown-menu">
+                  <li ng-repeat="item in menu.items"
+                    ng-class="{active: $root.route.vars.title == item.pageTitle, divider: item.divider}">
                     <a ng-if="!item.divider" href="{{item.url}}"><i class="{{item.icon}}"></i> {{item.label}}</a>
                   </li>
                 </ul>
