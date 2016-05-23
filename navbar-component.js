@@ -78,12 +78,9 @@ function Ctrl($element, $scope, brNavbarService, config) {
   };
 
   self.getDisplayedMenus = function() {
-    var menus = [];
-    for(var i = 0; i < self.service.displayOrder.length; ++i) {
-      var name = self.service.displayOrder[i];
-      menus.push(self.service.menus[name]);
-    }
-    return menus;
+    return self.service.displayOrder.map(function(name) {
+      return self.service.menus[name];
+    });
   };
 
   brNavbarService.register(self, $scope);
