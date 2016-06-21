@@ -1,6 +1,6 @@
 {
   "name": "bedrock-angular-navbar",
-  "version": "3.0.3-dev",
+  "version": "3.0.3",
   "main": ["./main.js"],
   "moduleType": ["amd"],
   "ignore": [],
