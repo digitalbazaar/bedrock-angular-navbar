@@ -1,5 +1,7 @@
 # bedrock-angular-navbar ChangeLog
 
+## 3.0.4 - 2016-06-28
+
 ### Changed
 - Remove br-alerts and depend on it from bedrock-angular v2.3.1+.
 
