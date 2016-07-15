@@ -1,5 +1,11 @@
 # bedrock-angular-navbar ChangeLog
 
+## 3.0.5 - 2016-07-15
+
+### Fixed
+- Fix bug where navbar scope is not updated post menu initialization. Wait
+  for Promise returned from all `menu.init` functions and then apply scope.
+
 ## 3.0.4 - 2016-06-28
 
 ### Changed
