@@ -29,13 +29,21 @@ function Ctrl($element, $scope, brNavbarService, config) {
   var _stack = {};
 
   // initialize menu items
-  angular.forEach(self.service.menus, function(menu) {
+  Promise.all(Object.keys(self.service.menus).map(function(id) {
+    var menu = self.service.menus[id];
+    var promise;
     if(typeof menu.init === 'function') {
-      menu.init.call(menu, $scope, menu);
+      promise = Promise.resolve(menu.init.call(menu, $scope, menu));
+    } else {
+      promise = Promise.resolve();
     }
-    if(menu.visible === undefined) {
-      menu.visible = true;
-    }
+    return promise.then(function() {
+      if(menu.visible === undefined) {
+        menu.visible = true;
+      }
+    });
+  })).then(function() {
+    $scope.$apply();
   });
 
   self.transclude = function(options) {
