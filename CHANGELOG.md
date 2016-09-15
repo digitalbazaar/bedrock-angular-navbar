@@ -1,5 +1,7 @@
 # bedrock-angular-navbar ChangeLog
 
+## 3.0.6 - 2016-09-15
+
 ### Changed
 - Catch and show menu init errors.
 
