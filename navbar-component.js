@@ -18,7 +18,7 @@ function register(module) {
 }
 
 /* @ngInject */
-function Ctrl($element, $scope, brNavbarService, config) {
+function Ctrl($element, $scope, brAlertService, brNavbarService, config) {
   var self = this;
   self.brand = config.data.style.brand;
   self.siteTitle = config.data.siteTitle;
@@ -42,7 +42,9 @@ function Ctrl($element, $scope, brNavbarService, config) {
         menu.visible = true;
       }
     });
-  })).then(function() {
+  })).catch(function(err) {
+    brAlertService.add('error', err, {scope: $scope});
+  }).then(function() {
     $scope.$apply();
   });
 
