@@ -19,12 +19,18 @@ function register(module) {
 
 /* @ngInject */
 function Ctrl(
-  $element, $rootScope, $scope, brAlertService, brNavbarService, config) {
+  $element, $rootScope, $route, $scope, brAlertService, brNavbarService,
+  config) {
   var self = this;
+  self.isNavCollapsed = true;
   self.brand = config.data.style.brand;
   self.route = $rootScope.route;
-  self.siteTitle = config.data.siteTitle;
   self.service = brNavbarService;
+  self.site = {
+    title: config.data.siteTitle,
+    brand: config.data.style.brand,
+    url: '/'
+  };
   self.templates = [];
 
   // a stack for previously transcluded content
@@ -49,6 +55,30 @@ function Ctrl(
   }).then(function() {
     $scope.$apply();
   });
+
+  self.isDefined = function(property) {
+    return (self.route.vars && typeof self.route.vars.navbar === 'object' &&
+      property in self.route.vars.navbar);
+  };
+
+  /**
+   * Should the given element be displayed on the navbar?
+   *
+   * @param element the element to be displayed.
+   *
+   * @return true if the element should be displayed, false otherwise.
+   */
+  self.shouldDisplay = function(element) {
+    var display = self.isDefined('display') ? self.route.vars.navbar.display :
+      brNavbarService.displayDefault;
+    if(display === 'all') {
+      return true;
+    }
+    if(Array.isArray(display)) {
+      return display.indexOf(element) !== -1;
+    }
+    return display === element;
+  };
 
   self.transclude = function(options) {
     angular.forEach(options.element, function(element) {
