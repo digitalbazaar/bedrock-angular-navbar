@@ -18,6 +18,10 @@ function factory(config) {
   var service = {};
   var _displayOrder = service.displayOrder = [];
 
+  // displayDefault may be a string or an array of strings
+  // valid values: all, brand, menu, toolbar
+  service.displayDefault = 'all';
+
   // reference to the registered navbar element
   var _navbar = null;
 

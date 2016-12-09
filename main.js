@@ -14,7 +14,9 @@ define([
 
 'use strict';
 
-var module = angular.module('bedrock-navbar', ['bedrock.alert']);
+var module = angular.module('bedrock-navbar', [
+  'bedrock.alert', 'ui.bootstrap'
+]);
 
 Array.prototype.slice.call(arguments, 1).forEach(function(register) {
   register(module);
