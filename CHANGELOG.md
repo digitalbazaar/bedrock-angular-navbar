@@ -1,5 +1,10 @@
 # bedrock-angular-navbar ChangeLog
 
+## 3.1.3 - 2016-12-11
+
+### Fixed
+- Do not show navbar menu when there are no submenus.
+
 ## 3.1.2 - 2016-12-11
 
 ### Fixed
