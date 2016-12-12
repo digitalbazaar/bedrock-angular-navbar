@@ -1,5 +1,7 @@
 # bedrock-angular-navbar ChangeLog
 
+## 3.1.0 - 2016-12-11
+
 ### Added
 - Allow routes to disable navbar via `vars`.
 
