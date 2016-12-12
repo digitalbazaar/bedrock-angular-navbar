@@ -24,7 +24,8 @@ function Ctrl(
   self.brand = config.data.style.brand;
   // default to showing navbar on route
   self.show = true;
-  if($rootScope.route.vars.navbar === false) {
+  if('route' in $rootScope && 'vars' in $rootScope.route &&
+    $rootScope.route.vars.navbar === false) {
     self.show = false;
   }
   self.siteTitle = config.data.siteTitle;
