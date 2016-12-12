@@ -18,9 +18,15 @@ function register(module) {
 }
 
 /* @ngInject */
-function Ctrl($element, $scope, brAlertService, brNavbarService, config) {
+function Ctrl(
+  $element, $rootScope, $scope, brAlertService, brNavbarService, config) {
   var self = this;
   self.brand = config.data.style.brand;
+  // default to showing navbar on route
+  self.show = true;
+  if($rootScope.route.vars.navbar === false) {
+    self.show = false;
+  }
   self.siteTitle = config.data.siteTitle;
   self.service = brNavbarService;
   self.templates = [];
