@@ -1,5 +1,10 @@
 # bedrock-angular-navbar ChangeLog
 
+## 3.1.1 - 2016-12-11
+
+### Fixed
+- Do explicit check for `route.vars` on `$rootScope`.
+
 ## 3.1.0 - 2016-12-11
 
 ### Added
