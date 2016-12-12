@@ -1,7 +1,10 @@
 # bedrock-angular-navbar ChangeLog
 
+## 3.1.2 - 2016-12-11
+
 ### Fixed
 - Ensure changes to `route.vars.navbar` are reflected.
+- Remove obsolete `version` from bower.json.
 
 ## 3.1.1 - 2016-12-11
 
