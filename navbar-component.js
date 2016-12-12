@@ -23,10 +23,11 @@ function Ctrl(
   var self = this;
   self.brand = config.data.style.brand;
   // default to showing navbar on route
-  self.show = true;
-  if('route' in $rootScope && 'vars' in $rootScope.route &&
-    $rootScope.route.vars.navbar === false) {
-    self.show = false;
+  self.route = $rootScope.route.current || {};
+  if(!('vars' in self.route)) {
+    self.route.vars = {navbar: true};
+  } else if(!('navbar' in self.route.vars)) {
+    self.route.vars.navbar = true;
   }
   self.siteTitle = config.data.siteTitle;
   self.service = brNavbarService;

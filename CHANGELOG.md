@@ -1,5 +1,8 @@
 # bedrock-angular-navbar ChangeLog
 
+### Fixed
+- Ensure changes to `route.vars.navbar` are reflected.
+
 ## 3.1.1 - 2016-12-11
 
 ### Fixed
