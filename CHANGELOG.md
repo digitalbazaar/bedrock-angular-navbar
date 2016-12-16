@@ -1,5 +1,7 @@
 # bedrock-angular-navbar ChangeLog
 
+## 3.1.4 - 2016-12-16
+
 ### Fixed
 - Override `$routeProvider` to set route default vars.
 
