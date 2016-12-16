@@ -20,6 +20,19 @@ Array.prototype.slice.call(arguments, 1).forEach(function(register) {
   register(module);
 });
 
-return module.name;
+/* @ngInject */
+module.config(function($routeProvider) {
+  // extend $routeProvider to set navbar defaults
+  var when = $routeProvider.when;
+  $routeProvider.when = function(path, route) {
+    if(!('vars' in route)) {
+      route.vars = {};
+    }
+    if(!('navbar' in route.vars)) {
+      route.vars.navbar = true;
+    }
+    return when.apply($routeProvider, arguments);
+  };
+});
 
 });
