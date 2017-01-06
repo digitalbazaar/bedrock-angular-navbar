@@ -1,5 +1,11 @@
 # bedrock-angular-navbar ChangeLog
 
+## 3.2.0 - 2017-01-06
+
+### Added
+- `route.vars.navbar.display` may be used to display only specific elements.
+- Add `tenant` element which may be used to brand routes.
+
 ## 3.1.4 - 2016-12-16
 
 ### Fixed
