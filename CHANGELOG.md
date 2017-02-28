@@ -1,5 +1,10 @@
 # bedrock-angular-navbar ChangeLog
 
+## 3.3.0 - 2017-02-27
+
+### Added
+- Add `collapse` function to navbar service.
+
 ## 3.2.0 - 2017-01-06
 
 ### Added
