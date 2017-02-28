@@ -22,8 +22,8 @@ function factory(config) {
   // valid values: all, brand, menu, toolbar
   service.displayDefault = 'all';
 
-  // reference to the registered navbar element
-  var _navbar = null;
+  // reference to the registered navbar controller
+  service._navbarController = null;
 
   // temporary storage for transcluded content to attach to the navbar once
   // its registered
@@ -41,14 +41,14 @@ function factory(config) {
    * @param scope the navbar's scope.
    */
   service.register = function(navbar, scope) {
-    if(_navbar) {
+    if(service._navbarController) {
       throw new Error('Navbar already registered.');
     }
-    _navbar = navbar;
+    service._navbarController = navbar;
 
     // unregister navbar once destroyed
     scope.$on('$destroy', function() {
-      _navbar = null;
+      service._navbarController = null;
     });
 
     // handle pending transclusions/inclusions
@@ -109,7 +109,7 @@ function factory(config) {
       throw new Error('options.operation must be "append" or "replace".');
     }
 
-    if(!_navbar) {
+    if(!service._navbarController) {
       // store transcluded content for later, but if it gets destroyed before
       // use, remove it from the list
       _pending.push({
@@ -126,7 +126,7 @@ function factory(config) {
       return;
     }
 
-    _navbar.transclude(options);
+    service._navbarController.transclude(options);
   };
 
   /**
@@ -139,7 +139,7 @@ function factory(config) {
       throw new Error('templateUrl must be a string.');
     }
 
-    if(!_navbar) {
+    if(!service._navbarController) {
       _pending.push({
         type: 'include',
         templateUrl: templateUrl
@@ -147,7 +147,16 @@ function factory(config) {
       return;
     }
 
-    _navbar.include(templateUrl);
+    service._navbarController.include(templateUrl);
+  };
+
+  /**
+   * Collapse the navbar, if it is collapsible.
+   */
+  service.collapse = function() {
+    if(service._navbarController) {
+      service._navbarController.isNavCollapsed = true;
+    }
   };
 
   return service;
