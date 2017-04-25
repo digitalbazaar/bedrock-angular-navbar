@@ -1,10 +1,11 @@
 /*!
  * Navbar Directive.
  *
- * Copyright (c) 2015-2016 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2015-2017 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  */
+/* global requirejs */
 define(['angular'], function(angular) {
 
 'use strict';
@@ -19,8 +20,7 @@ function register(module) {
 
 /* @ngInject */
 function Ctrl(
-  $element, $rootScope, $route, $scope, brAlertService, brNavbarService,
-  config) {
+  $element, $rootScope, $scope, brAlertService, brNavbarService, config) {
   var self = this;
   self.isNavCollapsed = true;
   self.brand = config.data.style.brand;
@@ -123,6 +123,10 @@ function Ctrl(
     return self.service.displayOrder.map(function(name) {
       return self.service.menus[name];
     });
+  };
+
+  self.collapse = function() {
+    self.isNavCollapsed = true;
   };
 
   brNavbarService.register(self, $scope);

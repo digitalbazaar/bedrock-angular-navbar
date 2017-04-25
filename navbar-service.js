@@ -155,7 +155,7 @@ function factory(config) {
    */
   service.collapse = function() {
     if(service._navbarController) {
-      service._navbarController.isNavCollapsed = true;
+      service._navbarController.collapse();
     }
   };
 

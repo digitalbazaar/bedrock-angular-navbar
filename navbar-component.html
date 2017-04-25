@@ -33,8 +33,7 @@
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse"
-        uib-collapse="$ctrl.isNavCollapsed">
+      <div class="collapse navbar-collapse" uib-collapse="$ctrl.isNavCollapsed">
         <div br-slot="br-navbar-body">
           <div ng-if="$ctrl.shouldDisplay('menu')" br-slot="br-navbar-menu">
             <!-- nav menu -->
@@ -42,8 +41,7 @@
               <li ng-repeat="menu in $ctrl.getDisplayedMenus()"
                 ng-class="{active: $ctrl.route.vars.title == menu.pageTitle, dropdown: menu.items}">
                 <a ng-if="menu.visible && !menu.items"
-                  href="{{menu.url}}" data-toggle="collapse" data-target=".navbar-collapse"
-                  ng-click="$ctrl.isNavCollapsed=true">
+                  href="{{menu.url}}" ng-click="$ctrl.collapse()">
                   <i class="{{menu.icon}}"></i> {{menu.label}}</a>
                 <a ng-if="menu.visible && menu.items"
                   href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -54,7 +52,7 @@
                   <li ng-repeat="item in menu.items"
                     ng-class="{active: $ctrl.route.vars.title == item.pageTitle, divider: item.divider}">
                     <a ng-if="!item.divider" href="{{item.url}}"
-                      ng-click="$ctrl.isNavCollapsed=true">
+                       ng-click="$ctrl.collapse()">
                       <i class="{{item.icon}}"></i> {{item.label}}
                     </a>
                   </li>
