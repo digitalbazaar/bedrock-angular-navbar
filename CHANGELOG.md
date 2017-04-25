@@ -1,5 +1,14 @@
 # bedrock-angular-navbar ChangeLog
 
+## 3.4.0 - 2017-04-25
+
+### Fixed
+- Remove erroneous `data-toggle` that was overriding
+  uib-collapse directive causing extra animation.
+
+### Added
+- Expose `collapse` function for navbar controller.
+
 ## 3.3.0 - 2017-02-27
 
 ### Added
