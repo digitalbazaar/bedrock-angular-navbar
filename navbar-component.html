@@ -39,7 +39,7 @@
             <!-- nav menu -->
             <ul class="nav navbar-nav">
               <li ng-repeat="menu in $ctrl.getDisplayedMenus()"
-                ng-class="{active: $ctrl.route.vars.title == menu.pageTitle, dropdown: menu.items}">
+                ng-class="{active: !$ctrl.route.changing && ($ctrl.route.vars.title == menu.pageTitle), dropdown: menu.items}">
                 <a ng-if="menu.visible && !menu.items"
                   href="{{menu.url}}" ng-click="$ctrl.collapse()">
                   <i class="{{menu.icon}}"></i> {{menu.label}}</a>
@@ -50,7 +50,7 @@
                 </a>
                 <ul ng-if="menu.visible && menu.items" class="dropdown-menu">
                   <li ng-repeat="item in menu.items"
-                    ng-class="{active: $ctrl.route.vars.title == item.pageTitle, divider: item.divider}">
+                    ng-class="{active: !$ctrl.route.changing && ($ctrl.route.vars.title == item.pageTitle), divider: item.divider}">
                     <a ng-if="!item.divider" href="{{item.url}}"
                        ng-click="$ctrl.collapse()">
                       <i class="{{item.icon}}"></i> {{item.label}}
