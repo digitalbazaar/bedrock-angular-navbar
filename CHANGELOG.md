@@ -1,5 +1,12 @@
 # bedrock-angular-navbar ChangeLog
 
+## 3.4.1 - 2017-04-28
+
+### Fixed
+- Remove erroneous `collapse` class that was
+  cause unnecessary navbar animations.
+- Do not show navbar item as active during route change.
+
 ## 3.4.0 - 2017-04-25
 
 ### Fixed
