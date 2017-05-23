@@ -5,18 +5,12 @@
  *
  * @author Dave Longley
  */
-/* global requirejs */
-define(['angular'], function(angular) {
+import angular from 'angular';
 
-'use strict';
-
-function register(module) {
-  module.component('brNavbar', {
-    controller: Ctrl,
-    templateUrl: requirejs.toUrl(
-      'bedrock-angular-navbar/navbar-component.html')
-  });
-}
+export default {
+  controller: Ctrl,
+  templateUrl: 'bedrock-angular-navbar/navbar-component.html'
+};
 
 /* @ngInject */
 function Ctrl(
@@ -155,7 +149,3 @@ function _destroy(element, operation, target, stack) {
     }
   };
 }
-
-return register;
-
-});

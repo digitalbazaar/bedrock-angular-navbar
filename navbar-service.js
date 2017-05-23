@@ -1,20 +1,14 @@
 /*!
  * Navbar Service.
  *
- * Copyright (c) 2015-2016 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2015-2017 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  */
-define(['angular'], function(angular) {
-
-'use strict';
-
-function register(module) {
-  module.service('brNavbarService', factory);
-}
+import angular from 'angular';
 
 /* @ngInject */
-function factory(config) {
+export default function factory(config) {
   var service = {};
   var _displayOrder = service.displayOrder = [];
 
@@ -161,7 +155,3 @@ function factory(config) {
 
   return service;
 }
-
-return register;
-
-});

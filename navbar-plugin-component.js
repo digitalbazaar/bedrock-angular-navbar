@@ -1,23 +1,17 @@
 /*!
  * Navbar Plugin Component.
  *
- * Copyright (c) 2015-2016 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2015-2017 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  */
-define([], function() {
-
-'use strict';
-
-function register(module) {
-  module.component('brNavbarPlugin', {
-    bindings: {
-      operation: '@brOperation'
-    },
-    transclude: true,
-    controller: Ctrl
-  });
-}
+export default {
+  bindings: {
+    operation: '@brOperation'
+  },
+  transclude: true,
+  controller: Ctrl
+};
 
 /* @ngInject */
 function Ctrl($transclude, brNavbarService) {
@@ -33,7 +27,3 @@ function Ctrl($transclude, brNavbarService) {
     });
   };
 }
-
-return register;
-
-});

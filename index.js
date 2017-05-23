@@ -1,26 +1,22 @@
 /*!
  * Navbar module.
  *
- * Copyright (c) 2015-2016 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2015-2017 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  */
-define([
-  'angular',
-  './navbar-component',
-  './navbar-plugin-component',
-  './navbar-service'
-], function(angular) {
-
-'use strict';
+import angular from 'angular';
+import NavbarComponent from './navbar-component.js';
+import NavbarPluginComponent from './navbar-plugin-component.js';
+import NavbarService from './navbar-service.js';
 
 var module = angular.module('bedrock-navbar', [
   'bedrock.alert', 'ui.bootstrap'
 ]);
 
-Array.prototype.slice.call(arguments, 1).forEach(function(register) {
-  register(module);
-});
+module.component('brNavbar', NavbarComponent);
+module.component('brNavbarPlugin', NavbarPluginComponent);
+module.service('brNavbarService', NavbarService);
 
 /* @ngInject */
 module.config(function($routeProvider) {
@@ -35,6 +31,4 @@ module.config(function($routeProvider) {
     }
     return when.apply($routeProvider, arguments);
   };
-});
-
 });

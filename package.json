@@ -1,0 +1,22 @@
+{
+  "name": "bedrock-angular-navbar",
+  "version": "3.4.1",
+  "description": "Bedrock AngularJS Navbar",
+  "main": "index.js",
+  "dependencies": {
+    "angular": "~1.6.4",
+    "angular-ui-bootstrap": "~2.5.0",
+    "bedrock-angular-alert": "^3.0.0"
+  },
+  "bedrock": {
+    "browserDependencies": "all"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/digitalbazaar/bedrock-angular-navbar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/digitalbazaar/bedrock-angular-navbar/issues"
+  },
+  "homepage": "https://github.com/digitalbazaar/bedrock-angular-navbar#readme"
+}
