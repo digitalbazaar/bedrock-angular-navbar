@@ -1,5 +1,12 @@
 # bedrock-angular-navbar ChangeLog
 
+## 4.0.0 - 2017-05-30
+
+### Changed
+- **BREAKING**: Switch package manager from bower to npm.
+- **BREAKING**: Replace requirejs/amd with ES6 import.
+- Angular 1.6.x is required.
+
 ## 3.4.1 - 2017-04-28
 
 ### Fixed
