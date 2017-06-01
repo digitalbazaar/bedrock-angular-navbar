@@ -1,5 +1,10 @@
 # bedrock-angular-navbar ChangeLog
 
+## 4.0.2 - 2017-06-01
+
+### Fixed
+- Add missing navbar.less.
+
 ## 4.0.1 - 2017-06-01
 
 ### Changed
