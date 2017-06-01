@@ -1,5 +1,5 @@
 /*!
- * Navbar Directive.
+ * Navbar Component.
  *
  * Copyright (c) 2015-2017 Digital Bazaar, Inc. All rights reserved.
  *
