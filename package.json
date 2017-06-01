@@ -1,6 +1,6 @@
 {
   "name": "bedrock-angular-navbar",
-  "version": "4.0.2-0",
+  "version": "4.0.2",
   "description": "Bedrock AngularJS Navbar",
   "main": "index.js",
   "less": "navbar.less",
