@@ -10,7 +10,7 @@ import NavbarComponent from './navbar-component.js';
 import NavbarPluginComponent from './navbar-plugin-component.js';
 import NavbarService from './navbar-service.js';
 
-var module = angular.module('bedrock-navbar', [
+var module = angular.module('bedrock.navbar', [
   'bedrock.alert', 'ui.bootstrap'
 ]);
 
