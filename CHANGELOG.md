@@ -1,5 +1,11 @@
 # bedrock-angular-navbar ChangeLog
 
+## 4.0.1 - 2017-06-01
+
+### Changed
+- **BREAKING** Change component name to `bedrock.navbar` to match current
+  conventions.
+
 ## 4.0.0 - 2017-05-30
 
 ### Changed
@@ -10,8 +16,8 @@
 ## 3.4.1 - 2017-04-28
 
 ### Fixed
-- Remove erroneous `collapse` class that was
-  cause unnecessary navbar animations.
+- Remove erroneous `collapse` class that was causing unnecessary
+  navbar animations.
 - Do not show navbar item as active during route change.
 
 ## 3.4.0 - 2017-04-25
