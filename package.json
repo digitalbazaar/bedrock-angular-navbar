@@ -7,7 +7,8 @@
   "dependencies": {
     "angular": "~1.6.4",
     "angular-ui-bootstrap": "~2.5.0",
-    "bedrock-angular-alert": "^3.0.0"
+    "bedrock-angular-alert": "^3.0.0",
+    "bootstrap": "~3.3.4"
   },
   "bedrock": {
     "browserDependencies": "all"
