@@ -1,5 +1,7 @@
 # bedrock-angular-navbar ChangeLog
 
+## 4.0.3 - 2017-06-01
+
 ### Fixed
 - Add `bootstrap` dependency.
 
