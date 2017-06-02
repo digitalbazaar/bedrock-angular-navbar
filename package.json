@@ -11,7 +11,12 @@
     "bootstrap": "~3.3.4"
   },
   "bedrock": {
-    "browserDependencies": "all"
+    "browserDependencies": "all",
+    "manifest": {
+      "bootstrap": {
+        "less": ["less/bootstrap.less", "less/theme.less"]
+      }
+    }
   },
   "repository": {
     "type": "git",
