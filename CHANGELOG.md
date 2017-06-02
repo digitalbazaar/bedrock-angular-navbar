@@ -1,5 +1,10 @@
 # bedrock-angular-navbar ChangeLog
 
+## 4.0.5 - 2017-06-02
+
+### Changed
+- Update deps.
+
 ## 4.0.4 - 2017-06-02
 
 ### Fixed
