@@ -85,7 +85,7 @@ function Ctrl(
         return;
       }
 
-      var target = $element.find('[br-slot="' + slot + '"]');
+      var target = $element.querySelectorAll('[br-slot="' + slot + '"]');
       if(target.length === 0) {
         throw new Error('"' + slot + '" is not a valid slot in the navbar.');
       }
