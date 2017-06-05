@@ -1,5 +1,10 @@
 # bedrock-angular-navbar ChangeLog
 
+## 4.0.6 - 2017-06-05
+
+### Fixed
+- Fix selector.
+
 ## 4.0.5 - 2017-06-02
 
 ### Changed
