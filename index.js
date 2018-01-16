@@ -8,6 +8,7 @@
 import angular from 'angular';
 import NavbarComponent from './navbar-component.js';
 import NavbarPluginComponent from './navbar-plugin-component.js';
+import SidenavComponent from './sidenav-component.js';
 import NavbarService from './navbar-service.js';
 
 var module = angular.module('bedrock.navbar', [
@@ -16,6 +17,7 @@ var module = angular.module('bedrock.navbar', [
 
 module.component('brNavbar', NavbarComponent);
 module.component('brNavbarPlugin', NavbarPluginComponent);
+module.component('brSidenav', SidenavComponent);
 module.service('brNavbarService', NavbarService);
 
 /* @ngInject */

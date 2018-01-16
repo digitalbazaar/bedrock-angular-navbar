@@ -1,5 +1,5 @@
 /*!
- * Navbar Component.
+ * Sidenav Component.
  *
  * Copyright (c) 2015-2017 Digital Bazaar, Inc. All rights reserved.
  *
@@ -9,7 +9,7 @@ import angular from 'angular';
 
 export default {
   controller: Ctrl,
-  templateUrl: 'bedrock-angular-navbar/navbar-component.html'
+  templateUrl: 'bedrock-angular-navbar/sidenav-component.html'
 };
 
 /* @ngInject */
@@ -27,6 +27,7 @@ function Ctrl(
     url: '/'
   };
   self.templates = [];
+  if(0) {
 
   // a stack for previously transcluded content
   var _stack = {};
@@ -123,13 +124,16 @@ function Ctrl(
   self.collapse = function() {
     self.isNavCollapsed = true;
   };
+  }
 
   self.toggleMenu = function() {
     console.log('toggle menu');
     $mdSidenav('sidenav').toggle();
   };
 
+if(0){
   brNavbarService.register(self, $scope);
+  }
 }
 
 function _destroy(element, operation, target, stack) {
