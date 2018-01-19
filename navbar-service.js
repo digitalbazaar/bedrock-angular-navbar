@@ -17,7 +17,10 @@ export default function factory(config) {
   service.displayDefault = 'all';
 
   // reference to the registered navbar controller
-  service._navbarController = null;
+  service._navbarController = {
+    navbar: null,
+    sidenav: null
+  };
 
   // temporary storage for transcluded content to attach to the navbar once
   // its registered
@@ -34,15 +37,15 @@ export default function factory(config) {
    * @param navbar the navbar controller.
    * @param scope the navbar's scope.
    */
-  service.register = function(navbar, scope) {
-    if(service._navbarController) {
+  service.register = function(navbar, scope, navbarType) {
+    if(service._navbarController[navbarType]) {
       throw new Error('Navbar already registered.');
     }
-    service._navbarController = navbar;
+    service._navbarController[navbarType] = navbar;
 
     // unregister navbar once destroyed
     scope.$on('$destroy', function() {
-      service._navbarController = null;
+      service._navbarController[navbarType] = null;
     });
 
     // handle pending transclusions/inclusions
@@ -59,7 +62,7 @@ export default function factory(config) {
     config.site = config.site || {};
     var templates = (config.site.navbar || {}).templates || [];
     angular.forEach(templates, function(templateUrl) {
-      service.include(templateUrl);
+      service.include(templateUrl, navbarType);
     });
   };
 
@@ -96,6 +99,7 @@ export default function factory(config) {
   service.transclude = function(options) {
     options = angular.extend({}, options);
 
+    console.log(options)
     if(!options.element) {
       throw new Error('options.element must be an angular-wrapped element.');
     }
@@ -103,7 +107,7 @@ export default function factory(config) {
       throw new Error('options.operation must be "append" or "replace".');
     }
 
-    if(!service._navbarController) {
+    if(!service._navbarController[options.navbarType]) {
       // store transcluded content for later, but if it gets destroyed before
       // use, remove it from the list
       _pending.push({
@@ -120,7 +124,7 @@ export default function factory(config) {
       return;
     }
 
-    service._navbarController.transclude(options);
+    service._navbarController[options.navbarType].transclude(options);
   };
 
   /**
@@ -128,12 +132,12 @@ export default function factory(config) {
    *
    * @param templateUrl the URL for the template.
    */
-  service.include = function(templateUrl) {
+  service.include = function(templateUrl, navbarType) {
     if(typeof templateUrl !== 'string') {
       throw new Error('templateUrl must be a string.');
     }
 
-    if(!service._navbarController) {
+    if(!service._navbarController[navbarType]) {
       _pending.push({
         type: 'include',
         templateUrl: templateUrl
@@ -141,15 +145,15 @@ export default function factory(config) {
       return;
     }
 
-    service._navbarController.include(templateUrl);
+    service._navbarController[navbarType].include(templateUrl);
   };
 
   /**
    * Collapse the navbar, if it is collapsible.
    */
   service.collapse = function() {
-    if(service._navbarController) {
-      service._navbarController.collapse();
+    if(service._navbarController.navbar) {
+      service._navbarController.navbar.collapse();
     }
   };
 

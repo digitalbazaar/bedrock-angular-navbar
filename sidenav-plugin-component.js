@@ -1,9 +1,9 @@
 /*!
- * Navbar Plugin Component.
+ * Sidenav Plugin Component.
  *
  * Copyright (c) 2015-2017 Digital Bazaar, Inc. All rights reserved.
  *
- * @author Dave Longley
+ * @author Ganesh Annan
  */
 export default {
   bindings: {
@@ -23,7 +23,7 @@ function Ctrl($transclude, brNavbarService) {
         element: clone,
         scope: childScope,
         operation: self.operation,
-        navbarType: 'navbar'
+        navbarType: 'sidenav'
       });
     });
   };

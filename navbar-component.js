@@ -125,11 +125,10 @@ function Ctrl(
   };
 
   self.toggleMenu = function() {
-    console.log('toggle menu');
     $mdSidenav('sidenav').toggle();
   };
 
-  brNavbarService.register(self, $scope);
+  brNavbarService.register(self, $scope, 'navbar');
 }
 
 function _destroy(element, operation, target, stack) {

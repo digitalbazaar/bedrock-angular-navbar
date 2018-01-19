@@ -27,7 +27,6 @@ function Ctrl(
     url: '/'
   };
   self.templates = [];
-  if(0) {
 
   // a stack for previously transcluded content
   var _stack = {};
@@ -124,16 +123,12 @@ function Ctrl(
   self.collapse = function() {
     self.isNavCollapsed = true;
   };
-  }
 
   self.toggleMenu = function() {
-    console.log('toggle menu');
     $mdSidenav('sidenav').toggle();
   };
 
-if(0){
-  brNavbarService.register(self, $scope);
-  }
+  brNavbarService.register(self, $scope, 'sidenav');
 }
 
 function _destroy(element, operation, target, stack) {

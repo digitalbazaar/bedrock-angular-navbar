@@ -1,80 +1,43 @@
 <div ng-if="$ctrl.route.vars.navbar">
-  <nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <div br-slot="br-navbar-header">
-          <div br-slot="br-navbar-header-inner"></div>
-          <button ng-if="$ctrl.getDisplayedMenus().length > 0 && $ctrl.shouldDisplay('menu')"
-            type="button" class="navbar-toggle collapsed" aria-expanded="false"
-            ng-click="$ctrl.isNavCollapsed = !$ctrl.isNavCollapsed">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a ng-if="$ctrl.shouldDisplay('brand')" class="navbar-brand" ng-href="{{$ctrl.site.url}}">
-            <img ng-if="$ctrl.site.brand.src"
-              ng-src="{{$ctrl.site.brand.src}}"
-              width="{{$ctrl.site.brand.width}}"
-              height="{{$ctrl.site.brand.height}}"
-              alt="{{$ctrl.site.brand.alt}}">
-            <span ng-if="!$ctrl.site.brand.src">{{$ctrl.site.title}}</span>
-          </a>
-          <a ng-if="$ctrl.shouldDisplay('tenant') && $ctrl.isDefined('tenant')"
-            class="navbar-brand" ng-href="{{$ctrl.route.vars.navbar.tenant.url}}">
-            <img ng-if="$ctrl.route.vars.navbar.tenant.brand.src"
-              ng-src="{{$ctrl.route.vars.navbar.tenant.brand.src}}"
-              width="{{$ctrl.route.vars.navbar.tenant.brand.width}}"
-              height="{{$ctrl.route.vars.navbar.tenant.brand.height}}"
-              alt="{{$ctrl.route.vars.navbar.tenant.brand.alt}}">
-            <span ng-if="!$ctrl.route.vars.navbar.tenant.brand.src">{{$ctrl.route.vars.navbar.tenant.title}}</span>
-          </a>
+  <md-toolbar class="md-hue-2" md-scroll-shrink role="navigation">
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" aria-label="Settings" ng-click="$ctrl.toggleMenu()">
+        <i class="fa fa-bars fa-lg"></i>
+      </md-button>
+      <h2 class="md-truncate" flex>
+        <a ng-if="$ctrl.shouldDisplay('brand')" ng-href="{{$ctrl.site.url}}" hide-xs>
+          <img ng-if="$ctrl.site.brand.src"
+            ng-src="{{$ctrl.site.brand.src}}"
+            width="{{$ctrl.site.brand.width}}"
+            height="{{$ctrl.site.brand.height}}"
+            alt="{{$ctrl.site.brand.alt}}">
+          <span hide-xs hide-sm>{{$ctrl.site.title}}</span>
+        </a>
+        <a ng-if="$ctrl.shouldDisplay('tenant') && $ctrl.isDefined('tenant')"
+          ng-href="{{$ctrl.route.vars.navbar.tenant.url}}" hide-xs>
+          <img ng-if="$ctrl.route.vars.navbar.tenant.brand.src"
+            ng-src="{{$ctrl.route.vars.navbar.tenant.brand.src}}"
+            width="{{$ctrl.route.vars.navbar.tenant.brand.width}}"
+            height="{{$ctrl.route.vars.navbar.tenant.brand.height}}"
+            alt="{{$ctrl.route.vars.navbar.tenant.brand.alt}}">
+          <span ng-if="!$ctrl.route.vars.navbar.tenant.brand.src">{{$ctrl.route.vars.navbar.tenant.title}}</span>
+        </a>
+        <span hide-xs ng-if="$ctrl.shouldDisplay('brand') || ($ctrl.shouldDisplay('tenant') && $ctrl.isDefined('tenant'))">|</span>
+        <span>{{$ctrl.route.vars.title}}</span>
+      </h2>
+      <div ng-if="$ctrl.shouldDisplay('toolbar')">
+        <div ng-repeat="template in $ctrl.templates">
+          <ng-include src="template"></ng-include>
         </div>
-      </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="navbar-collapse" uib-collapse="$ctrl.isNavCollapsed">
-        <div br-slot="br-navbar-body">
-          <div ng-if="$ctrl.shouldDisplay('menu')" br-slot="br-navbar-menu">
-            <!-- nav menu -->
-            <ul class="nav navbar-nav">
-              <li ng-repeat="menu in $ctrl.getDisplayedMenus()"
-                ng-class="{active: !$ctrl.route.changing && ($ctrl.route.vars.title == menu.pageTitle), dropdown: menu.items}">
-                <a ng-if="menu.visible && !menu.items"
-                  href="{{menu.url}}" ng-click="$ctrl.collapse()">
-                  <i class="{{menu.icon}}"></i> {{menu.label}}</a>
-                <a ng-if="menu.visible && menu.items"
-                  href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="{{menu.icon}}"></i> {{menu.label}}
-                  <b class="caret"></b>
-                </a>
-                <ul ng-if="menu.visible && menu.items" class="dropdown-menu">
-                  <li ng-repeat="item in menu.items"
-                    ng-class="{active: !$ctrl.route.changing && ($ctrl.route.vars.title == item.pageTitle), divider: item.divider}">
-                    <a ng-if="!item.divider" href="{{item.url}}"
-                      ng-click="$ctrl.collapse()">
-                      <i class="{{item.icon}}"></i> {{item.label}}
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul><!-- /nav menu -->
+        <div br-slot="br-navbar-toolbar">
+          <div class="navbar-right" style="margin-right: 0px">
+            <div br-slot="br-navbar-tool"></div>
           </div>
         </div>
-        <div ng-if="$ctrl.shouldDisplay('toolbar')">
-          <div ng-repeat="template in $ctrl.templates">
-            <ng-include src="template"></ng-include>
-          </div>
-          <div br-slot="br-navbar-toolbar">
-            <div class="navbar-right">
-              <div br-slot="br-navbar-tool"></div>
-            </div>
-          </div>
-          <div class="navbar-right">
-            <div br-slot="br-navbar-button-toolbar" class="btn-toolbar"></div>
-          </div>
+        <div class="navbar-right">
+          <div br-slot="br-navbar-button-toolbar" class="btn-toolbar"></div>
         </div>
       </div>
     </div>
-  </nav>
+  </md-toolbar>
 </div>
