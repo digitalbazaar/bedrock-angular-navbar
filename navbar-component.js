@@ -122,6 +122,7 @@ function Ctrl(
 
   self.collapse = function() {
     self.isNavCollapsed = true;
+    $mdSidenav('sidenav').close();
   };
 
   self.toggleMenu = function() {
