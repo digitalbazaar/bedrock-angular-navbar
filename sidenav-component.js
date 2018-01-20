@@ -134,6 +134,10 @@ function Ctrl(
 
 function _destroy(element, operation, target, stack) {
   return function() {
+    // FIXME: determine the purpose of this code and adjust it ...
+    //   it is currently broken in a number of places and causes undesirable
+    //   behavior (i.e. removing a link to a page when clicked in the sidenav)
+    /*
     // if element is in stack, just remove it from the stack
     for(var i = 0; i < stack.length; ++i) {
       var idx = stack[i].index(element);
@@ -152,6 +156,6 @@ function _destroy(element, operation, target, stack) {
       if(target.is(':empty') && stack.length > 0) {
         target.append(stack.pop());
       }
-    }
+    }*/
   };
 }
