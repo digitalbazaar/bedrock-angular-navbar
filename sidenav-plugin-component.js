@@ -15,10 +15,10 @@ export default {
 
 /* @ngInject */
 function Ctrl($transclude, brNavbarService) {
-  var self = this;
+  const self = this;
 
-  self.$postLink = function() {
-    $transclude(function(clone, childScope) {
+  self.$postLink = () => {
+    $transclude((clone, childScope) => {
       brNavbarService.transclude({
         element: clone,
         scope: childScope,

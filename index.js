@@ -12,7 +12,7 @@ import SidenavPluginComponent from './sidenav-plugin-component.js';
 import SidenavComponent from './sidenav-component.js';
 import NavbarService from './navbar-service.js';
 
-var module = angular.module('bedrock.navbar', ['ngMaterial']);
+const module = angular.module('bedrock.navbar', ['ngMaterial']);
 
 module.component('brNavbar', NavbarComponent);
 module.component('brNavbarPlugin', NavbarPluginComponent);
@@ -21,11 +21,11 @@ module.component('brSidenavPlugin', SidenavPluginComponent);
 module.service('brNavbarService', NavbarService);
 
 /* @ngInject */
-module.config(function($routeProvider) {
+module.config($routeProvider => {
   // FIXME: is this still used in bedrock-angular 4.x+? if not, remove
   // extend $routeProvider to set navbar defaults
-  var when = $routeProvider.when;
-  $routeProvider.when = function(path, route) {
+  const when = $routeProvider.when;
+  $routeProvider.when = (path, route) => {
     if(!('vars' in route)) {
       route.vars = {};
     }

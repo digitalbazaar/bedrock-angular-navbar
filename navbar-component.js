@@ -29,32 +29,31 @@ function Ctrl(
   self.templates = [];
 
   // a stack for previously transcluded content
-  var _stack = {};
+  const _stack = {};
 
   // initialize menu items
-  Promise.all(Object.keys(self.service.menus).map(function(id) {
-    var menu = self.service.menus[id];
-    var promise;
+  Promise.all(Object.keys(self.service.menus).map(id => {
+    const menu = self.service.menus[id];
+    let promise;
     if(typeof menu.init === 'function') {
       promise = Promise.resolve(menu.init.call(menu, $scope, menu));
     } else {
       promise = Promise.resolve();
     }
-    return promise.then(function() {
+    return promise.then(() => {
       if(menu.visible === undefined) {
         menu.visible = true;
       }
     });
-  })).catch(function(err) {
+  })).catch(err => {
     brAlertService.add('error', err, {scope: $scope});
-  }).then(function() {
+  }).then(() => {
     $scope.$apply();
   });
 
-  self.isDefined = function(property) {
-    return (self.route.vars && typeof self.route.vars.navbar === 'object' &&
-      property in self.route.vars.navbar);
-  };
+  self.isDefined = property => self.route.vars &&
+    typeof self.route.vars.navbar === 'object' &&
+    property in self.route.vars.navbar;
 
   /**
    * Should the given element be displayed on the navbar?
@@ -63,8 +62,8 @@ function Ctrl(
    *
    * @return true if the element should be displayed, false otherwise.
    */
-  self.shouldDisplay = function(element) {
-    var display = self.isDefined('display') ? self.route.vars.navbar.display :
+  self.shouldDisplay = element => {
+    const display = self.isDefined('display') ? self.route.vars.navbar.display :
       brNavbarService.displayDefault;
     if(display === 'all') {
       return true;
@@ -75,22 +74,22 @@ function Ctrl(
     return display === element;
   };
 
-  self.transclude = function(options) {
-    angular.forEach(options.element, function(element) {
+  self.transclude = options => {
+    angular.forEach(options.element, element => {
       element = angular.element(element);
 
       // find where to transclude the element
-      var slot = element.attr('br-slot');
+      const slot = element.attr('br-slot');
       if(!angular.isDefined(slot)) {
         // nothing to transclude, continue
         return;
       }
 
-      var target = $element[0].querySelectorAll('[br-slot="' + slot + '"]');
+      let target = $element[0].querySelectorAll('[br-slot="' + slot + '"]');
       if(target.length === 0) {
         throw new Error('"' + slot + '" is not a valid slot in the navbar.');
       }
-      var stack = _stack[slot] = _stack[slot] || [];
+      const stack = _stack[slot] = _stack[slot] || [];
       target = angular.element(target[0]);
 
       // clean up element when its scope is destroyed
@@ -110,48 +109,43 @@ function Ctrl(
     });
   };
 
-  self.include = function(templateUrl) {
+  self.include = templateUrl => {
     self.templates.push(templateUrl);
   };
 
-  self.getDisplayedMenus = function() {
-    return self.service.displayOrder.map(function(name) {
-      return self.service.menus[name];
-    });
-  };
+  self.getDisplayedMenus = () => self.service.displayOrder.map(name =>
+    self.service.menus[name]);
 
-  self.collapse = function() {
+  self.collapse = () => {
     self.isNavCollapsed = true;
     $mdSidenav('sidenav').close();
   };
 
-  self.toggleMenu = function() {
+  self.toggleMenu = () => {
     $mdSidenav('sidenav').toggle();
   };
 
   brNavbarService.register(self, $scope, 'navbar');
 }
 
-function _destroy(element, operation, target, stack) {
-  return function() {
-    // if element is in stack, just remove it from the stack
-    for(var i = 0; i < stack.length; ++i) {
-      var idx = stack[i].index(element);
-      if(idx !== -1) {
-        if(stack[i].length === 1) {
-          stack.splice(i, 1);
-        }
-        element.remove();
-        return;
+const _destroy = (element, operation, target, stack) => () => {
+  // if element is in stack, just remove it from the stack
+  for(let i = 0; i < stack.length; ++i) {
+    const idx = stack[i].index(element);
+    if(idx !== -1) {
+      if(stack[i].length === 1) {
+        stack.splice(i, 1);
       }
+      element.remove();
+      return;
     }
+  }
 
-    // remove element from target
-    element.remove();
-    if(operation === 'replace') {
-      if(target.is(':empty') && stack.length > 0) {
-        target.append(stack.pop());
-      }
+  // remove element from target
+  element.remove();
+  if(operation === 'replace') {
+    if(target.is(':empty') && stack.length > 0) {
+      target.append(stack.pop());
     }
-  };
-}
+  }
+};
