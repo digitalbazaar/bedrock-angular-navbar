@@ -9,7 +9,7 @@ import angular from 'angular';
 
 export default {
   controller: Ctrl,
-  templateUrl: 'bedrock-angular-navbar/navbar-component.html'
+  templateUrl: 'bedrock-angular-navbar/sidenav-component.html'
 };
 
 /* @ngInject */
