@@ -25,13 +25,12 @@ module.config($routeProvider => {
   // FIXME: is this still used in bedrock-angular 4.x+? if not, remove
   // extend $routeProvider to set navbar defaults
   const when = $routeProvider.when;
-  $routeProvider.when = (path, route) => {
+  $routeProvider.when = function(path, route) {
     if(!('vars' in route)) {
       route.vars = {};
     }
     if(!('navbar' in route.vars)) {
       route.vars.navbar = true;
-    }
-    return when.apply($routeProvider, arguments);
+    }    return when.apply($routeProvider, arguments);
   };
 });
