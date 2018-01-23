@@ -11,7 +11,8 @@
             width="{{$ctrl.site.brand.width}}"
             height="{{$ctrl.site.brand.height}}"
             alt="{{$ctrl.site.brand.alt}}"
-            fallback-src="{{$ctrl.site.brand.src}}.png">
+            fallback-src="{{$ctrl.site.brand.src}}.png"
+            style="vertical-align: middle">
           <span hide-xs hide-sm>{{$ctrl.site.title}}</span>
         </a>
         <a ng-if="$ctrl.shouldDisplay('tenant') && $ctrl.isDefined('tenant')"
@@ -20,7 +21,8 @@
             ng-src="{{$ctrl.route.vars.navbar.tenant.brand.src}}"
             width="{{$ctrl.route.vars.navbar.tenant.brand.width}}"
             height="{{$ctrl.route.vars.navbar.tenant.brand.height}}"
-            alt="{{$ctrl.route.vars.navbar.tenant.brand.alt}}">
+            alt="{{$ctrl.route.vars.navbar.tenant.brand.alt}}"
+            style="vertical-align: middle">
           <span ng-if="!$ctrl.route.vars.navbar.tenant.brand.src">{{$ctrl.route.vars.navbar.tenant.title}}</span>
         </a>
         <span hide-xs ng-if="$ctrl.shouldDisplay('brand') || ($ctrl.shouldDisplay('tenant') && $ctrl.isDefined('tenant'))">|</span>
