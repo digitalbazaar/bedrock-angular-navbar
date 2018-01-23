@@ -17,7 +17,6 @@ function Ctrl(
   $element, $mdSidenav, $rootScope, $scope, brAlertService, brNavbarService,
   config) {
   const self = this;
-  self.isNavCollapsed = true;
   self.brand = config.data.style.brand;
   self.route = $rootScope.route;
   self.service = brNavbarService;
@@ -113,17 +112,13 @@ function Ctrl(
     self.templates.push(templateUrl);
   };
 
+  // Async toggle the given sidenav
+  self.toggle = () => {
+    self.service.toggle();
+  };
+
   self.getDisplayedMenus = () => self.service.displayOrder.map(name =>
     self.service.menus[name]);
-
-  self.collapse = () => {
-    self.isNavCollapsed = true;
-    $mdSidenav('sidenav').close();
-  };
-
-  self.toggleMenu = () => {
-    $mdSidenav('sidenav').toggle();
-  };
 
   brNavbarService.register(self, $scope, 'navbar');
 }

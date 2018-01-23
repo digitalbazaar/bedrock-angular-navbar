@@ -17,7 +17,6 @@ function Ctrl(
   $element, $mdSidenav, $rootScope, $scope, brAlertService, brNavbarService,
   config) {
   const self = this;
-  self.isNavCollapsed = true;
   self.brand = config.data.style.brand;
   self.route = $rootScope.route;
   self.service = brNavbarService;
@@ -116,14 +115,31 @@ function Ctrl(
   self.getDisplayedMenus = () => self.service.displayOrder.map(name =>
     self.service.menus[name]);
 
+  // Async close the given sidenav
   self.collapse = () => {
-    self.isNavCollapsed = true;
     $mdSidenav('sidenav').close();
   };
 
-  self.toggleMenu = () => {
+  // Async toggle the given sidenav
+  self.toggle = () => {
     $mdSidenav('sidenav').toggle();
   };
+
+  // Async open the given sidenav
+  self.open = () => {
+    $mdSidenav('sidenav').open();
+  }
+
+  // Sync check to see if the specified sidenav is set to be open
+  self.isOpen = () => {
+    $mdSidenav('sidenav').isOpen();
+  }
+
+  // Sync check to whether given sidenav is locked open
+  // If this is true, the sidenav will be open regardless of close()
+  self.isLockedOpen = () => {
+    $mdSidenav('sidenav').isLockedOpen();
+  }
 
   brNavbarService.register(self, $scope, 'sidenav');
 }

@@ -148,11 +148,20 @@ export default function factory(config) {
   };
 
   /**
-   * Collapse the navbar, if it is collapsible.
+   * Collapse the sidenav, if it is collapsible.
    */
   service.collapse = () => {
-    if(service._navbarController.navbar) {
-      service._navbarController.navbar.collapse();
+    if(service._navbarController.sidenav) {
+      service._navbarController.sidenav.collapse();
+    }
+  };
+
+  /**
+   * Toggle the sidenav, if it is collapsible.
+   */
+  service.toggle = () => {
+    if(service._navbarController.sidenav) {
+      service._navbarController.sidenav.toggle();
     }
   };
 
