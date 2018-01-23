@@ -31,6 +31,7 @@ module.config($routeProvider => {
     }
     if(!('navbar' in route.vars)) {
       route.vars.navbar = true;
-    }    return when.apply($routeProvider, arguments);
+    }
+    return when.apply($routeProvider, arguments);
   };
 });

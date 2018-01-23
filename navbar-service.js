@@ -8,7 +8,7 @@
 import angular from 'angular';
 
 /* @ngInject */
-export default function factory(config) {
+export default function factory() {
   const service = {};
   const _displayOrder = service.displayOrder = [];
 
@@ -28,6 +28,7 @@ export default function factory(config) {
 
   // exposes menus for configuration
   service.menus = {};
+  service.templates = [];
 
   /**
    * Registers the app's navbar. Only one navbar can be registered at a time,
@@ -58,9 +59,7 @@ export default function factory(config) {
       }
     }
 
-    // include templates from config
-    config.site = config.site || {};
-    const templates = (config.site.navbar || {}).templates || [];
+    const templates = service.templates || [];
     angular.forEach(templates, templateUrl => {
       service.include(templateUrl, navbarType);
     });
@@ -74,7 +73,7 @@ export default function factory(config) {
    * https://material.angularjs.org/latest/demo/menu
    */
   service.registerMenu = (menu, options) => {
-    console.error('Creating menus via the navbar service is deprecated.')
+    console.error('Creating menus via the navbar service is deprecated.');
     if(!('label' in options)) {
       throw new Error('Menu definition must include a "label" property.');
     }
@@ -93,6 +92,25 @@ export default function factory(config) {
     service.displayOrder.sort((a, b) => {
       return service.menus[a].label.localeCompare(service.menus[b].label);
     });
+  };
+
+  /**
+   * Registers the app's navbar template.
+   *
+   * @param template the navbar template(s) to be registerd. Can register one
+   *                     by passing a string or register many by passing an
+   *                     array of strings.
+   */
+  service.registerTemplate = template => {
+    if(typeof template !== 'string' || Array.isArray(template)) {
+      throw new Error('template must be a string or an array.');
+    }
+    if(template in service.templates) {
+      throw new Error('Template "' + template + '" is already registered.');
+    }
+
+    typeof template === 'string' ?
+      service.templates.push(template) : service.templates.push(...template);
   };
 
   /**

@@ -105,18 +105,18 @@ function Ctrl(
   // Async open the given sidenav
   self.open = () => {
     $mdSidenav('sidenav').open();
-  }
+  };
 
   // Sync check to see if the specified sidenav is set to be open
   self.isOpen = () => {
     $mdSidenav('sidenav').isOpen();
-  }
+  };
 
   // Sync check to whether given sidenav is locked open
   // If this is true, the sidenav will be open regardless of close()
   self.isLockedOpen = () => {
     $mdSidenav('sidenav').isLockedOpen();
-  }
+  };
 
   brNavbarService.register(self, $scope, 'sidenav');
 }

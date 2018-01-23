@@ -30,7 +30,6 @@ function Ctrl(
   // a stack for previously transcluded content
   const _stack = {};
 
-
   self.isDefined = property => self.route.vars &&
     typeof self.route.vars.navbar === 'object' &&
     property in self.route.vars.navbar;
