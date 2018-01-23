@@ -8,10 +8,11 @@
         <h2 class="md-truncate" flex>
           <a ng-href="{{$ctrl.site.url}}">
             <img ng-if="$ctrl.site.brand.src"
-              ng-src="{{$ctrl.site.brand.src}}"
+              ng-src="{{$ctrl.site.brand.src}}.svg"
               width="{{$ctrl.site.brand.width}}"
               height="{{$ctrl.site.brand.height}}"
-              alt="{{$ctrl.site.brand.alt}}">
+              alt="{{$ctrl.site.brand.alt}}"
+              fallback-src="{{$ctrl.site.brand.src}}.png">
             <span>{{$ctrl.site.title}}</span>
           </a>
         </h2>
