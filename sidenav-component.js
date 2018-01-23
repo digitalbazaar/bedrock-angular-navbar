@@ -30,26 +30,6 @@ function Ctrl(
   // a stack for previously transcluded content
   const _stack = {};
 
-  // initialize menu items
-  Promise.all(Object.keys(self.service.menus).map(id => {
-    const menu = self.service.menus[id];
-    let promise;
-    if(typeof menu.init === 'function') {
-      promise = Promise.resolve(menu.init.call(menu, $scope, menu));
-    } else {
-      promise = Promise.resolve();
-    }
-    return promise.then(() => {
-      if(menu.visible === undefined) {
-        menu.visible = true;
-      }
-    });
-  })).catch(err => {
-    brAlertService.add('error', err, {scope: $scope});
-  }).then(() => {
-    $scope.$apply();
-  });
-
   self.isDefined = property => self.route.vars &&
     typeof self.route.vars.navbar === 'object' &&
     property in self.route.vars.navbar;
@@ -111,9 +91,6 @@ function Ctrl(
   self.include = templateUrl => {
     self.templates.push(templateUrl);
   };
-
-  self.getDisplayedMenus = () => self.service.displayOrder.map(name =>
-    self.service.menus[name]);
 
   // Async close the given sidenav
   self.collapse = () => {

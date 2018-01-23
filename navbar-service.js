@@ -66,7 +66,15 @@ export default function factory(config) {
     });
   };
 
+  /**
+   * Please refer to these resources for menu creation
+   * https://material.angularjs.org/latest/api/directive/mdMenuBar
+   * https://material.angularjs.org/latest/demo/menuBar
+   * https://material.angularjs.org/latest/api/directive/mdMenu
+   * https://material.angularjs.org/latest/demo/menu
+   */
   service.registerMenu = (menu, options) => {
+    console.error('Creating menus via the navbar service is deprecated.')
     if(!('label' in options)) {
       throw new Error('Menu definition must include a "label" property.');
     }
