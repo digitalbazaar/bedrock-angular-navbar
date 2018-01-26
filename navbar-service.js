@@ -73,7 +73,7 @@ export default function factory() {
    * https://material.angularjs.org/latest/demo/menu
    */
   service.registerMenu = (menu, options) => {
-    console.error('Creating menus via the navbar service is deprecated.');
+    console.warn('Creating menus via the navbar service is deprecated.');
     if(!('label' in options)) {
       throw new Error('Menu definition must include a "label" property.');
     }
