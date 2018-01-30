@@ -13,7 +13,7 @@ export default function factory() {
   const _displayOrder = service.displayOrder = [];
 
   // displayDefault may be a string or an array of strings
-  // valid values: all, brand, menu, toolbar
+  // valid values: all, brand, menu, toolbar, sidenav, images
   service.displayDefault = 'all';
 
   // reference to the registered navbar controller

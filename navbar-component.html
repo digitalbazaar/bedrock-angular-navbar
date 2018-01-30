@@ -1,12 +1,12 @@
 <div ng-if="$ctrl.route.vars.navbar">
   <md-toolbar class="md-hue-2" md-scroll-shrink role="navigation">
     <div class="md-toolbar-tools">
-      <md-button class="md-icon-button" aria-label="Settings" ng-click="$ctrl.toggle()">
+      <md-button class="md-icon-button" aria-label="Settings" ng-click="$ctrl.toggle()" ng-if="$ctrl.shouldDisplay('sidenav')">
         <i class="fa fa-bars fa-lg"></i>
       </md-button>
       <h2 class="md-truncate" flex>
         <a ng-if="$ctrl.shouldDisplay('brand')" ng-href="{{$ctrl.site.url}}" hide-xs>
-          <img ng-if="$ctrl.site.brand.src"
+          <img ng-if="$ctrl.shouldDisplay('images') && $ctrl.site.brand.src"
             ng-src="{{$ctrl.site.brand.src}}.svg"
             width="{{$ctrl.site.brand.width}}"
             height="{{$ctrl.site.brand.height}}"
@@ -17,7 +17,7 @@
         </a>
         <a ng-if="$ctrl.shouldDisplay('tenant') && $ctrl.isDefined('tenant')"
           ng-href="{{$ctrl.route.vars.navbar.tenant.url}}" hide-xs>
-          <img ng-if="$ctrl.route.vars.navbar.tenant.brand.src"
+          <img ng-if="$ctrl.shouldDisplay('images') && $ctrl.route.vars.navbar.tenant.brand.src"
             ng-src="{{$ctrl.route.vars.navbar.tenant.brand.src}}"
             width="{{$ctrl.route.vars.navbar.tenant.brand.width}}"
             height="{{$ctrl.route.vars.navbar.tenant.brand.height}}"
