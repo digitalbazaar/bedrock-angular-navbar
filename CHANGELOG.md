@@ -1,5 +1,7 @@
 # bedrock-angular-navbar ChangeLog
 
+## 5.0.0 - 2018-03-20
+
 ### Changed
 - **BREAKING**: Switch to material design.
 - Add sidenav support.
